@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    include: oauth
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        use-new-id-generator-mappings: true
+        
+  datasource:
+    url: jdbc:mysql://lgt-db.cn4vdycf7otc.ap-northeast-2.rds.amazonaws.com:3306/lgt_database
+    username: admin
+    password: 1q2w3e4r!
