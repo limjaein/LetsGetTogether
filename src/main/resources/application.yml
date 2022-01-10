@@ -1,6 +1,10 @@
 spring:
   profiles:
     include: oauth
+  freemarker:
+    template-loader-path: classpath:/templates
+    prefix: /freemarker/
+    suffix: .ftl
   jpa:
     show-sql: true
     properties:
