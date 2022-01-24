@@ -21,6 +21,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.21'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compileOnly 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
 
 test {
