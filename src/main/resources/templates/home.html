@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <h1>홈 화면</h1>
+    <div class="authenticated">
+        로그인 계정 : <span id ="user" th:text="${session.user.email}"></span>
+        <div>
+            <a href="/logout" class="btn" role="button">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
