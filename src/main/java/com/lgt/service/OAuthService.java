@@ -70,6 +70,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 		}
 		
 		httpSession.setAttribute("user", new SessionUser(user));
+		httpSession.setAttribute("access_token", userRequest.getAccessToken().getTokenValue());
 		
 		return new DefaultOAuth2User(
 				Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()))

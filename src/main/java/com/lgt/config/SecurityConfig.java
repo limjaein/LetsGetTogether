@@ -27,10 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf()
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 			.and()
-				.logout()
-				.logoutSuccessUrl("/")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.and()
 				.oauth2Login() // OAuth2 로그인 설정 시작
 				.defaultSuccessUrl("/home")
 				.userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때 설정을 저장 
