@@ -21,7 +21,9 @@ import com.lgt.domain.User;
 import com.lgt.domain.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor 
 public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -59,6 +61,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
 		User user;
 		Optional<User> optionalUser = userRepository.findByEmail(email);
+		String accessToken = userRequest.getAccessToken().getTokenValue();
 		
 		if (optionalUser.isPresent()) {
 			user = optionalUser.get();
@@ -69,8 +72,10 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 			userRepository.save(user);
 		}
 		
+		log.info("access token " + accessToken);
+		
 		httpSession.setAttribute("user", new SessionUser(user));
-		httpSession.setAttribute("access_token", userRequest.getAccessToken().getTokenValue());
+		httpSession.setAttribute("access_token", accessToken);
 		
 		return new DefaultOAuth2User(
 				Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()))
