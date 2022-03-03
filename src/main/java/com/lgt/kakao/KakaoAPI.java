@@ -13,7 +13,7 @@ public class KakaoAPI {
 	private final String AUTHORIZATION = "Authorization";
 	private final String BEARER_PREFIX = "Bearer ";
 	
-	private final String logoutURL = "https://kapi.kakao.com/v1/user/unlink";
+	private final String logoutURL = "https://kapi.kakao.com/v1/user/logout";
 	
 	public void logout(String accessToken) {
 		try {
@@ -24,17 +24,7 @@ public class KakaoAPI {
 			conn.setRequestProperty(AUTHORIZATION, BEARER_PREFIX + accessToken);
 			
 			conn.disconnect();
-			/*
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output;
-			String json = "";
-			while ((output = br.readLine()) != null) {
-				json += output;
-			}
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.readTree(json);
-			log.info(root.toPrettyString());
-			*/
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
