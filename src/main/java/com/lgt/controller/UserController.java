@@ -1,5 +1,7 @@
 package com.lgt.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,26 +15,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class UserController {
-	
+
 	private KakaoAPI kakaoapi;
-	
+
 	public UserController() {
 		kakaoapi = new KakaoAPI();
 	}
-	
+
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String accessToken = (String)session.getAttribute("access_token");
-		
-		if (accessToken != null && !"".equals(accessToken)) {
-			kakaoapi.logout(accessToken);
+		Optional<String> accessToken = getAccessToken(request.getSession());
+
+		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
+			kakaoapi.logout(accessToken.get());
 			session.removeAttribute("access_token");
 			session.removeAttribute("user");
-			
 			log.info("logout success");
 		}
-		
+
 		return "redirect:/";
+	}
+
+	private Optional<String> getAccessToken(HttpSession session) {
+		return Optional.ofNullable((String)session.getAttribute("access_token"));
 	}
 }
