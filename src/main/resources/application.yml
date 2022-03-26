@@ -13,3 +13,6 @@ spring:
     url: jdbc:mysql://lgt-db.cn4vdycf7otc.ap-northeast-2.rds.amazonaws.com:3306/lgt_database
     username: admin
     password: 1q2w3e4r!
+
+api:
+  kakao: https://kapi.kakao.com/v1
