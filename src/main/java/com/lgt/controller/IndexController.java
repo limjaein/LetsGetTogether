@@ -17,15 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 public class IndexController {
 
 	@GetMapping("/")
-	public String index(HttpServletRequest request) {
-		Optional<String> accessToken = getAccessToken(request.getSession());
-		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
-			return "home";
-		} else {
-			return "index";
-		}
+	public String index() {
+		return "index";
 	}
 
+	@GetMapping("/home")
+	public String home() {
+		return "home";
+	}
+
+	// TODO: util 공통 함수로 빼기
 	private Optional<String> getAccessToken(HttpSession session) {
 		return Optional.ofNullable((String)session.getAttribute("access_token"));
 	}
