@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/index", "/login/**").permitAll()
+				.antMatchers("/", "/index", "/login/**", "/images/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.oauth2Login() // OAuth2 로그인 설정 시작

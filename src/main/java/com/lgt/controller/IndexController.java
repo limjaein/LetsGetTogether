@@ -13,22 +13,25 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 
 	@GetMapping("/")
-	public String index(HttpServletRequest request) {
+	public String main(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String accessToken = (String)session.getAttribute("access_token");
 		
-		String htmlName = "index";
-		
 		if (accessToken != null && !"".equals(accessToken)) {
-			htmlName = "home"; 
+			return "redirect:/home";
 		}
 		
-		return htmlName;
+		return "redirect:/index";
 	}
-	
+
 	@GetMapping("/home")
 	public String home() {
 		return "home";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
 	}
 	
 }
