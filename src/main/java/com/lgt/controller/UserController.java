@@ -45,7 +45,6 @@ public class UserController {
 
 		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
 			Optional<List<Friend>> freinds = kakaoAPIService.getFreinds(accessToken.get());
-
 			if (freinds.isPresent()) {
 				model.addAttribute("friends", freinds.get());
 			}
@@ -54,7 +53,6 @@ public class UserController {
 		return "friends_list";
 	}
 
-	// TODO: util 공통 함수로 빼기
 	private Optional<String> getAccessToken(HttpSession session) {
 		return Optional.ofNullable((String)session.getAttribute("access_token"));
 	}
