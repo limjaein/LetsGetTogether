@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 			.and()
 				.oauth2Login() // OAuth2 로그인 설정 시작
-				.defaultSuccessUrl("/", true)
+				.defaultSuccessUrl("/home", true)
 				.userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때 설정을 저장
 				.userService(oAuthService); // OAuth2 로그인 성공 시, 후작업을 진행할 UserService 인터페이스 구현체 등록
 	}
