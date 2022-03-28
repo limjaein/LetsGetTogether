@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="https://picsum.photos/30" class="d-inline-block align-text-top">
+                    LGT
+                </a>
+                <a href="/user/logout" class="btn" role="button">Logout</a>
+            </div>
+        </nav>
+        <br>
+        <div class="authenticated">
+            <span id ="user" th:text="${session.user.email}"></span>
+
+        </div>
+        <br>
+        <ul class="nav nav-tabs nav-fill mb-3" id="tabs-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tabs-create-tab" data-bs-toggle="pill" data-bs-target="#tabs-create" type="button" role="tab" aria-controls="tabs-create" aria-selected="true">약속 만들기</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tabs-list-tab" data-bs-toggle="pill" data-bs-target="#tabs-list" type="button" role="tab" aria-controls="tabs-list" aria-selected="false">약속 리스트</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tabs-friends-list-tab" data-bs-toggle="pill" data-bs-target="#tabs-friends-list" type="button" role="tab" aria-controls="tabs-friends-list" aria-selected="false">친구 리스트</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="tabs-tabContent">
+            <div class="tab-pane fade show active" id="tabs-create" role="tabpanel" aria-labelledby="tabs-create-tab">...</div>
+            <div class="tab-pane fade" id="tabs-list" role="tabpanel" aria-labelledby="tabs-list-tab">...</div>
+            <div class="tab-pane fade" id="tabs-friends-list" role="tabpanel" aria-labelledby="tabs-friends-list-tab">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NICK NAME</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="friend : ${friends}">
+                        <td th:text="${friend.id}">친구 id</td>
+                        <td th:text="${friend.profile_nickname}">nick name</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
