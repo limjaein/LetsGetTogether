@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -12,6 +12,7 @@
         <div>
             <a href="/user/logout" class="btn" role="button">Logout</a>
         </div>
+        <a th:href="@{/user/friends}">친구 목록</a>
     </div>
 </body>
 </html>
