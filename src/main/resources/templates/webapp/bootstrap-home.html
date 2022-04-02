@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -42,22 +42,11 @@
         <div class="tab-content" id="tabs-tabContent">
             <div class="tab-pane fade show active" id="tabs-create" role="tabpanel" aria-labelledby="tabs-create-tab">...</div>
             <div class="tab-pane fade" id="tabs-list" role="tabpanel" aria-labelledby="tabs-list-tab">...</div>
-            <div class="tab-pane fade" id="tabs-friends-list" role="tabpanel" aria-labelledby="tabs-friends-list-tab">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>NICK NAME</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="friend : ${friends}">
-                        <td th:text="${friend.id}">친구 id</td>
-                        <td th:text="${friend.profile_nickname}">nick name</td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="tab-pane fade"
+                 id="tabs-friends-list"
+                 role="tabpanel"
+                 aria-labelledby="tabs-friends-list-tab"
+                 th:insert="~{template/friends-list :: friends-list}">
             </div>
         </div>
     </div>
