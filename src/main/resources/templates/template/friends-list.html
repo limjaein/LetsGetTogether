@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table class="table" th:fragment="friends-list">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NICK NAME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="friend : ${friends}">
+            <td th:text="${friend.id}">친구 id</td>
+            <td th:text="${friend.profile_nickname}">nick name</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
