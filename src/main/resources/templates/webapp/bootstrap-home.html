@@ -15,11 +15,36 @@
     <div class="container py-4">
         <div th:replace="~{template/navbar :: navbar}"></div>
         <br>
-        <div class="authenticated">
-            <span id ="user" th:text="${session.user.email}"></span>
 
+        <div class="authenticated" th:with="email=${session.user.email}">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#friendsListModal">
+                Test Friends List
+            </button>
+            <!-- Button trigger popover-->
+            <button type="button" class="btn btn-primary" data-bs-toggle="popover" title="Session User Email" th:data-bs-content="${email}" data-bs-content="">
+                Test session.user.email
+            </button>
         </div>
         <br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="friendsListModal" tabindex="-1" aria-labelledby="friendsListModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="friendsListModalLabel">Friends List</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" th:insert="~{template/friends-list :: friends-list}"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <ul class="nav nav-tabs nav-fill mb-3" id="tabs-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="tabs-create-tab" data-bs-toggle="pill" data-bs-target="#tabs-create" type="button" role="tab" aria-controls="tabs-create" aria-selected="true">약속 만들기</button>
@@ -27,21 +52,20 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tabs-list-tab" data-bs-toggle="pill" data-bs-target="#tabs-list" type="button" role="tab" aria-controls="tabs-list" aria-selected="false">약속 리스트</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tabs-friends-list-tab" data-bs-toggle="pill" data-bs-target="#tabs-friends-list" type="button" role="tab" aria-controls="tabs-friends-list" aria-selected="false">친구 리스트</button>
-            </li>
         </ul>
         <div class="tab-content" id="tabs-tabContent">
             <div class="tab-pane fade show active" id="tabs-create" role="tabpanel" aria-labelledby="tabs-create-tab">...</div>
             <div class="tab-pane fade" id="tabs-list" role="tabpanel" aria-labelledby="tabs-list-tab">...</div>
-            <div class="tab-pane fade"
-                 id="tabs-friends-list"
-                 role="tabpanel"
-                 aria-labelledby="tabs-friends-list-tab"
-                 th:insert="~{template/friends-list :: friends-list}">
-            </div>
         </div>
     </div>
+
     <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../../static/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript">
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
 </body>
 </html>
