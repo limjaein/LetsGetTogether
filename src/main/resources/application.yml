@@ -16,3 +16,7 @@ spring:
 
 api:
   kakao: https://kapi.kakao.com/v1
+
+springdoc:
+  # API 문서 버전
+  version: 'v1'
