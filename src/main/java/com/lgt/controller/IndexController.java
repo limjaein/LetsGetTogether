@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.lgt.domain.Friend;
-import com.lgt.service.KakaoAPIService;
+import com.lgt.dto.KakaoFriendsResponseDto;
+import com.lgt.service.KakaoApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class IndexController {
 
-	private final KakaoAPIService kakaoAPIService;
+	private final KakaoApiService kakaoApiService;
 
 	@GetMapping("/")
 	public String index() {
@@ -31,10 +31,8 @@ public class IndexController {
 		Optional<String> accessToken = Optional.ofNullable((String)session.getAttribute("access_token"));
 
 		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
-			Optional<List<Friend>> freinds = kakaoAPIService.getFreinds(accessToken.get());
-			if (freinds.isPresent()) {
-				model.addAttribute("friends", freinds.get());
-			}
+			List<KakaoFriendsResponseDto.Friend> friends = kakaoApiService.getFriends(accessToken.get(), Optional.empty());
+			model.addAttribute("friends", friends);
 		}
 		return "webapp/bootstrap-home";
 	}

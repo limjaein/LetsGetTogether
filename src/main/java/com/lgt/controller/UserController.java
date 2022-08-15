@@ -11,9 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lgt.domain.Friend;
-import com.lgt.service.KakaoAPIService;
-
+import com.lgt.dto.KakaoFriendsResponseDto;
+import com.lgt.service.KakaoApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,8 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
+	// TODO: UserController kakaoApiController 와 중복되는데 어떤걸로 사용할지 고민중
 
-	private final KakaoAPIService kakaoAPIService;
+	private final KakaoApiService kakaoApiService;
 
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request) {
@@ -30,7 +30,7 @@ public class UserController {
 		Optional<String> accessToken = getAccessToken(session);
 
 		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
-			kakaoAPIService.logout(accessToken.get());
+			kakaoApiService.logout(accessToken.get());
 			session.removeAttribute("access_token");
 			session.removeAttribute("user");
 			log.info("logout success");
@@ -44,13 +44,11 @@ public class UserController {
 		Optional<String> accessToken = getAccessToken(request.getSession());
 
 		if (accessToken.isPresent() && !"".equals(accessToken.get())) {
-			Optional<List<Friend>> freinds = kakaoAPIService.getFreinds(accessToken.get());
-			if (freinds.isPresent()) {
-				model.addAttribute("friends", freinds.get());
-			}
+			List<KakaoFriendsResponseDto.Friend> friends = kakaoApiService.getFriends(accessToken.get(), Optional.empty());
+			model.addAttribute("friends", friends);
 		}
 
-		return "friends_list";
+		return "friends-list";
 	}
 
 	private Optional<String> getAccessToken(HttpSession session) {
